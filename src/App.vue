@@ -2,6 +2,7 @@
 import { useDice } from '@/composables/useDice'
 import { useGame } from '@/composables/useGame'
 import CategorySection from './components/CategorySection.vue'
+import PlayerCountSelect from './components/PlayerCountSelect.vue'
 
 const game = useGame()
 
@@ -37,7 +38,7 @@ const rollDice = () => {
 				<!-- <TheWelcome /> -->
 			</div>
 		</header>
-
+<PlayerCountSelect />
 		<main class="flex flex-col gap-6">
 			<ul class="flex gap-4">
 				<li v-for="(dice, index) in dices" :key="index" @click="dice.hold()"
