@@ -1,24 +1,48 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import CategoryItem from './CategoryItem.vue';
-import { useGame } from '@/composables/useGame'
+import { useCategories } from '@/composables/useCategories'
+import { useGameStore } from "@/stores/game";
+import { useGame } from "@/composables/useGame";
+import type { Player } from '@/types/player';
 
-const { sumOnes, sumTwos, sumThrees, sumFours, sumFives, sumSixes, isThreeOfKind, isFourOfKind, isFullHouse, isSmallStraight, isLargeStraight, sumChance, isYahtzee } = useGame()
+const gameStore = useGameStore()
+const game = useGame()
+const { sumOnes, sumTwos, sumThrees, sumFours, sumFives, sumSixes, isThreeOfKind, isFourOfKind,
+	isFullHouse, isSmallStraight, isLargeStraight, sumChance, isYatzy } = useCategories()
+
+const currentPlayer = computed(() => gameStore.getCurrentPlayer)
+
+const categories = [
+	{ key: "aces", label: "1", score: sumOnes },
+	{ key: "twos", label: "2", score: sumTwos },
+	{ key: "threes", label: "3", score: sumThrees },
+	{ key: "fours", label: "4", score: sumFours },
+	{ key: "fives", label: "5", score: sumFives },
+	{ key: "sixes", label: "6", score: sumSixes },
+	{ key: "threeOfKind", label: "3x", score: isThreeOfKind },
+	{ key: "fourOfKind", label: "4x", score: isFourOfKind },
+	{ key: "fullHouse", label: "FH", score: isFullHouse },
+	{ key: "smallStraight", label: "KS", score: isSmallStraight },
+	{ key: "largeStraight", label: "LS", score: isLargeStraight },
+	{ key: "chance", label: "CH", score: sumChance },
+	{ key: "yatzy", label: "Y!", score: isYatzy },
+]
+
+const setScore = (category: keyof Player, score: number) => {
+	if (currentPlayer.value) {
+		gameStore.setCategoryScore(currentPlayer.value.id, category, score)
+	}
+	game.endTurn()
+}
 </script>
 
 <template>
-	<div class="w-max grid grid-cols-6 gap-x-2 gap-y-4">
-		<CategoryItem :value="sumOnes">1</CategoryItem>
-		<CategoryItem :value="sumTwos">2</CategoryItem>
-		<CategoryItem :value="sumThrees">3</CategoryItem>
-		<CategoryItem :value="sumFours">4</CategoryItem>
-		<CategoryItem :value="sumFives">5</CategoryItem>
-		<CategoryItem :value="sumSixes">6</CategoryItem>
-		<CategoryItem :value="isThreeOfKind">3x</CategoryItem>
-		<CategoryItem :value="isFourOfKind">4x</CategoryItem>
-		<CategoryItem :value="isFullHouse">FH</CategoryItem>
-		<CategoryItem :value="isSmallStraight">KS</CategoryItem>
-		<CategoryItem :value="isLargeStraight">LS</CategoryItem>
-		<CategoryItem :value="sumChance">CH</CategoryItem>
-		<CategoryItem :value="isYahtzee" class="col-span-full w-full">Y!</CategoryItem>
+	<div v-if="currentPlayer" class="w-max grid grid-cols-6 gap-x-2 gap-y-4">
+		<CategoryItem v-for="category in categories" :key="category.key" :status="currentPlayer[category.key]"
+			:value="category.score.value" @clicked="setScore(category.key, category.score.value)"
+			class="last:col-span-full last:w-full">
+			{{ category.label }}
+		</CategoryItem>
 	</div>
 </template>
