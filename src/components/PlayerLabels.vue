@@ -5,5 +5,6 @@ const gameStore = useGameStore()
 <template>
 	<div>
 		<h3>Player <span class="text-3xl font-bold">{{ gameStore.currentPlayerId }}</span> Turn</h3>
+		<div>Total Score: {{ gameStore.getCurrentPlayer?.totalScore }}</div>
 	</div>
 </template>

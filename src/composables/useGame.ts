@@ -19,6 +19,7 @@ export function useGame() {
 		gameStore.setCurrentPlayerId(1)
 		gameStore.diceSet.resetAll()
 		gameStore.resetRolls()
+		categories.reset()
 	}
 
 	const endTurn = () => {
@@ -29,6 +30,7 @@ export function useGame() {
 	}
 
 	const diceRolled = () => {
+		gameStore.diceSet.rollAll()
 		categories.update(diceSet.value)
 		gameStore.rollsLeft--
 	}

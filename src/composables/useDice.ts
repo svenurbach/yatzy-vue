@@ -7,8 +7,6 @@ export function useDice() {
 	const roll = () => {
 		if (!isHold.value) {
 			face.value = Math.floor(Math.random() * 6) + 1;
-		} else {
-			console.log("Dice is on hold. Can't roll!, Value:", face.value);
 		}
 	}
 

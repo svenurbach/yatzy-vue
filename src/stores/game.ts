@@ -17,7 +17,7 @@ export const useGameStore = defineStore('game', () => {
 	const boardViewActive = ref(false)
 
 	// Getters / Properties
-	const getCurrentPlayer = computed(() => players.value.find(p => p.id === currentPlayerId.value))
+	const getCurrentPlayer = computed((): Player | undefined => players.value.find(p => p.id === currentPlayerId.value))
 	const getDiceSet = computed(() => diceSet.diceSet.map(dice => dice.face))
 
 
@@ -30,16 +30,33 @@ export const useGameStore = defineStore('game', () => {
 	}
 
 	// Actions (Setter) / Methods
+	function calculatePlayerScores(player: Player) {
+		const upperCategories = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes'] as const
+		const lowerCategories = ['threeOfKind', 'fourOfKind', 'fullHouse', 'smallStraight', 'largeStraight', 'chance', 'yatzy'] as const
+		const BONUS_BREAKPOINT = 63
+		const UPPER_BONUS = 50
+		const YATZY_BONUS = 100
+
+		player.upperSectionScore = upperCategories.reduce((sum, category) => {
+			return sum + (player[category] || 0)
+		}, 0)
+
+		player.lowerSectionScore = lowerCategories.reduce((sum, category) => {
+			return sum + (player[category] || 0)
+		}, 0)
+
+		const upperSectionBonus = player.upperSectionScore >= BONUS_BREAKPOINT ? UPPER_BONUS : 0
+		const yatzyBonus = (player.yatzyBonusCount ?? 0) * YATZY_BONUS
+		player.totalScore = player.upperSectionScore + player.lowerSectionScore + upperSectionBonus + yatzyBonus
+	}
+
+
 	function setPlayerCount(count: number): void {
 		playerCount.value = count;
-		console.log("playerCount.value", playerCount.value);
-
 	}
 
 	function setCurrentPlayerId(playerId: number): void {
 		currentPlayerId.value = playerId;
-		console.log("currentPlayerId changed", currentPlayerId.value);
-
 	}
 
 	function clearPlayers(): void {
@@ -55,6 +72,7 @@ export const useGameStore = defineStore('game', () => {
 
 	function setPlayers(count: number): void {
 		clearPlayers();
+		console.log("setPlayer")
 		for (let i = 0; i < count; i++) {
 			const newPlayer: Player = {
 				id: i + 1,
@@ -73,11 +91,11 @@ export const useGameStore = defineStore('game', () => {
 				smallStraight: null,
 				largeStraight: null,
 				chance: null,
-				yatzy: null
+				yatzy: null,
+				yatzyBonusCount: null
 			}
 			players.value.push(newPlayer);
 		}
-		console.log("setPlayers", players.value)
 	}
 
 	function resetRolls(): void {
@@ -100,5 +118,6 @@ export const useGameStore = defineStore('game', () => {
 		welcomeViewActive,
 		boardViewActive,
 		getCurrentPlayer,
+		calculatePlayerScores
 	}
 })

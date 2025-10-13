@@ -47,3 +47,4 @@ npm run lint
 1. Menu Screen
 1. Highscore Screen
 1. Options Screen
+1. Yatzy Bonus +100 pro Kniffel umsetzen

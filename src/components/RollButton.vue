@@ -9,12 +9,11 @@ const game = useGame()
 const isDisabled = computed(() => gameStore.rollsLeft < 1)
 
 const roll = () => {
-	gameStore.diceSet.rollAll()
 	game.diceRolled()
 }
 </script>
 <template>
-	<div class="flex flex-row">
+	<div class="flex flex-row justify-center">
 		<button @click="roll()" :disabled="isDisabled"
 			class="size-20 cursor-pointer text-red-700 disabled:text-gray-400 disabled:cursor-not-allowed">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
