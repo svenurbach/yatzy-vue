@@ -104,6 +104,7 @@ export const useGameStore = defineStore('game', () => {
 
 	return {
 		MAX_PLAYER,
+		players,
 		diceSet,
 		getDiceSet,
 		rollsLeft,

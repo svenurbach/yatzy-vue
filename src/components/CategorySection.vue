@@ -43,10 +43,10 @@ const setScore = (category: keyof Player, score: number) => {
 </script>
 
 <template>
-	<div v-if="currentPlayer" class="w-max grid grid-cols-6 gap-x-2 gap-y-4 m-auto">
+	<div v-if="currentPlayer" class="grid grid-cols-6 gap-x-2 gap-y-4 m-auto">
 		<CategoryItem v-for="category in categories" :key="category.key" :playerStatus="currentPlayer[category.key]"
 			:value="category.score.value" @clicked="setScore(category.key, category.score.value)"
-			class="last:col-span-full last:w-full">
+			class="h-18 last:col-span-full last:w-full">
 			{{ category.label }}
 		</CategoryItem>
 	</div>

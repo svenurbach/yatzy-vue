@@ -16,10 +16,10 @@ const props = defineProps({
 
 defineEmits(['clicked'])
 
-const isActive = computed(() => props.value >= 0 )
+const isActive = computed(() => props.value >= 0)
 const isDisabled = computed(() => !isActive.value || isAlreadyPicked.value);
 const isAlreadyPicked = computed(() => props.playerStatus !== null);
-const hasValueForPlayer = computed(() => !isAlreadyPicked.value && props.value > 0 );
+const hasValueForPlayer = computed(() => !isAlreadyPicked.value && props.value > 0);
 const displayValue = computed(() => {
 	if (isAlreadyPicked.value) {
 		return props.playerStatus;
@@ -33,15 +33,12 @@ const displayValue = computed(() => {
 
 <template>
 	<div class="flex flex-col text-center" :class="{ 'opacity-20': isAlreadyPicked }">
-		<button type="button" :disabled="isDisabled"
-			class="flex flex-col justify-center items-center bg-amber-400 border-2
-         border-black rounded min-w-15 h-15 text-lg font-bold text-black transition-colors duration-200"
-			:class="{
-				'bg-emerald-300': hasValueForPlayer,
-				'cursor-not-allowed': isDisabled,
-				'cursor-pointer': !isDisabled
-			}"
-			@click="$emit('clicked')">
+		<button type="button" :disabled="isDisabled" class="flex flex-col justify-center items-center bg-amber-400 border-2
+         border-black rounded text-lg font-bold text-black transition-colors duration-200 h-full" :class="{
+			'bg-emerald-300': hasValueForPlayer,
+			'cursor-not-allowed': isDisabled,
+			'cursor-pointer': !isDisabled
+		}" @click="$emit('clicked')">
 			<slot />
 		</button>
 		<div>
