@@ -4,44 +4,47 @@ import { computed } from 'vue';
 const props = defineProps({
 	value: {
 		type: Number,
-		default: 0,
+		default: -1,
 		required: true
 	},
-	status: {
+	playerStatus: {
 		type: [Number, null],
-		default: 0,
-		required: false
+		default: null,
+		required: true
 	}
 })
 
 defineEmits(['clicked'])
 
-const isDisabled = computed(() => props.status !== null);
-const shouldHighlight = computed(() => props.value > 0 && props.status === null);
+const isActive = computed(() => props.value >= 0 )
+const isDisabled = computed(() => !isActive.value || isAlreadyPicked.value);
+const isAlreadyPicked = computed(() => props.playerStatus !== null);
+const hasValueForPlayer = computed(() => !isAlreadyPicked.value && props.value > 0 );
 const displayValue = computed(() => {
-	if (props.status === null && props.value > 0) {
-		return props.value;
+	if (isAlreadyPicked.value) {
+		return props.playerStatus;
 	}
-	if (props.status !== null) {
-		return props.status;
+	if (hasValueForPlayer.value || isActive.value) {
+		return props.value;
 	}
 	return "-";
 });
 </script>
 
 <template>
-	<div class="flex flex-col text-center">
+	<div class="flex flex-col text-center" :class="{ 'opacity-20': isAlreadyPicked }">
 		<button type="button" :disabled="isDisabled"
 			class="flex flex-col justify-center items-center bg-amber-400 border-2
-         border-black rounded min-w-15 h-15 cursor-pointer text-lg font-bold text-black transition-colors duration-200"
+         border-black rounded min-w-15 h-15 text-lg font-bold text-black transition-colors duration-200"
 			:class="{
-				'bg-emerald-300': shouldHighlight,
-				'opacity-20 cursor-not-allowed': isDisabled
+				'bg-emerald-300': hasValueForPlayer,
+				'cursor-not-allowed': isDisabled,
+				'cursor-pointer': !isDisabled
 			}"
 			@click="$emit('clicked')">
 			<slot />
 		</button>
-		<div :class="{ 'opacity-20': isDisabled }">
+		<div>
 			{{ displayValue }}
 		</div>
 	</div>
