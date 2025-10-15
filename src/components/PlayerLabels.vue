@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useGameStore } from "@/stores/game";
-import { computed } from "vue";
+import type { Player } from "@/types/player";
+import { computed, ref } from "vue";
 
 const gameStore = useGameStore()
 const players = computed(() => gameStore.players)
@@ -17,14 +18,25 @@ const starredPlayerId = computed(() => {
 	})
 	return playerId
 })
+const showDetails = ref(false)
+const playerForDetails = ref<Player>()
+const handleScoreClick = (player: Player) => {
+	if (showDetails.value && player !== playerForDetails.value) {
+		playerForDetails.value = player
+	} else {
+		playerForDetails.value = player
+		showDetails.value = !showDetails.value
+	}
+}
 // hasBonus grren plus
 </script>
 
 <template>
 	<div class="flex flex-row gap-4 justify-center">
-		<div v-for="(player, index) in players" :key="index"
-			class="relative flex flex-row border-2 rounded-lg bg-white *:px-2 *:py-1"
-			:class="currentPlayerId === player.id ? 'border-emerald-500 shadow-[0_0_3px_oklch(60%_0.145_163.225)]' : 'border-black'">
+		<button v-for="(player, index) in players" :key="index"
+			class="flex flex-row border-2 rounded-lg bg-white *:px-2 *:py-1 cursor-pointer"
+			:class="currentPlayerId === player.id ? 'border-emerald-500 shadow-[0_0_3px_oklch(60%_0.145_163.225)]' : 'border-black'"
+			@click="handleScoreClick(player)">
 			<!-- Crown Badge Start -->
 			<div v-if="player.id === starredPlayerId"
 				class="absolute left-1/2 -top-7 -translate-x-1/2 stroke stroke-black fill-amber-300">
@@ -41,6 +53,19 @@ const starredPlayerId = computed(() => {
 			<div class="font-mono">
 				{{ player.totalScore }}
 			</div>
-		</div>
+		</button>
 	</div>
+	<Teleport to="#app-main">
+		<div v-if="showDetails && playerForDetails"
+			class="absolute left-1/2 transform -translate-x-1/2 p-4 rounded-lg border-2 w-80 aspect-2/3 bg-red-200 top-14">
+			<div class="text-center">Punkte Player {{ playerForDetails.id }}</div>
+			<ul class="font-mono text-sm">
+				<li>Oberer Bereich: {{ playerForDetails.upperSectionScore }}</li>
+				<li>Bonus (>=63): {{ playerForDetails.upperSectionBonus }}</li>
+				<li>Unterer Bereich: {{ playerForDetails.lowerSectionScore }}</li>
+				<li>Extra Yatzy Bonus: {{ playerForDetails.yatzyBonusCount }}</li>
+				<li>Gesamt: {{ playerForDetails.totalScore }}</li>
+			</ul>
+		</div>
+	</Teleport>
 </template>

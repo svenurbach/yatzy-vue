@@ -21,7 +21,7 @@ watch(() => gameStore.playerCount, (newVal) => {
 <template>
 	<div class="h-dvh flex flex-col max-w-md m-auto *:px-4 *:py-3 bg-neutral-200">
 		<AppHeader />
-		<main class="flex-1 flex flex-col gap-6">
+		<main id="app-main" class="relative flex-1 flex flex-col gap-6">
 			<PlayerCountSelect v-if="gameStore.welcomeViewActive" />
 			<template v-if="gameStore.boardViewActive">
 				<PlayerLabels />

@@ -38,7 +38,7 @@ const setScore = (category: keyof Player, score: number) => {
 			currentPlayer.value['yatzyBonusCount'] = +1
 		}
 		gameStore.setCategoryScore(currentPlayer.value.id, category, score)
-		gameStore.calculatePlayerScores(currentPlayer.value)
+		gameStore.setPlayerScores(currentPlayer.value)
 	}
 	game.endTurn()
 }

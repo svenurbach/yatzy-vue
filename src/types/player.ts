@@ -2,6 +2,7 @@ export interface Player {
 	id: number,
 	totalScore: number;
 	upperSectionScore: number;
+	upperSectionBonus: boolean;
 	lowerSectionScore: number;
 	aces: null | number;
 	twos: null | number;

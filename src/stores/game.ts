@@ -2,9 +2,11 @@ import { ref, computed, readonly } from 'vue'
 import { defineStore } from 'pinia'
 import type { Player } from '@/types/player'
 import { useDiceSet } from '@/composables/useDiceSet'
+import { useScores } from '@/composables/useScores'
 
 export const useGameStore = defineStore('game', () => {
 	//  States / Data
+	const score = useScores()
 	const diceSet = useDiceSet(5)
 	const rollsLeft = ref(3)
 	const hasDecision = ref(false)
@@ -30,24 +32,11 @@ export const useGameStore = defineStore('game', () => {
 	}
 
 	// Actions (Setter) / Methods
-	function calculatePlayerScores(player: Player) {
-		const upperCategories = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes'] as const
-		const lowerCategories = ['threeOfKind', 'fourOfKind', 'fullHouse', 'smallStraight', 'largeStraight', 'chance', 'yatzy'] as const
-		const BONUS_BREAKPOINT = 63
-		const UPPER_BONUS = 35
-		const YATZY_BONUS = 100
-
-		player.upperSectionScore = upperCategories.reduce((sum, category) => {
-			return sum + (player[category] || 0)
-		}, 0)
-
-		player.lowerSectionScore = lowerCategories.reduce((sum, category) => {
-			return sum + (player[category] || 0)
-		}, 0)
-
-		const upperSectionBonus = player.upperSectionScore >= BONUS_BREAKPOINT ? UPPER_BONUS : 0
-		const yatzyBonus = (player.yatzyBonusCount ?? 0) * YATZY_BONUS
-		player.totalScore = player.upperSectionScore + player.lowerSectionScore + upperSectionBonus + yatzyBonus
+	function setPlayerScores(player: Player) {
+		player.upperSectionScore = score.getUpperSectionScore(player)
+		player.upperSectionBonus = score.checkUpperSectionBonus(player)
+		player.lowerSectionScore = score.getLowerSectionScore(player)
+		player.totalScore = score.getTotalScore(player)
 	}
 
 
@@ -78,6 +67,7 @@ export const useGameStore = defineStore('game', () => {
 				id: i + 1,
 				totalScore: 0,
 				upperSectionScore: 0,
+				upperSectionBonus: false,
 				lowerSectionScore: 0,
 				aces: null,
 				twos: null,
@@ -119,6 +109,6 @@ export const useGameStore = defineStore('game', () => {
 		welcomeViewActive,
 		boardViewActive,
 		getCurrentPlayer,
-		calculatePlayerScores
+		setPlayerScores
 	}
 })
