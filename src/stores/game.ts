@@ -39,7 +39,6 @@ export const useGameStore = defineStore('game', () => {
 		player.totalScore = score.getTotalScore(player)
 	}
 
-
 	function setPlayerCount(count: number): void {
 		playerCount.value = count;
 	}

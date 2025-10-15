@@ -29,20 +29,23 @@ export function useScores() {
 		return lowerSectionScore
 	}
 
-	function getYatzyBonusValue(player: Player) {
+	function getYatzyBonus(player: Player) {
 		return (player.yatzyBonusCount ?? 0) * YATZY_BONUS
 	}
 
 	function getTotalScore(player: Player) {
-		return getUpperSectionScore(player) + getUpperSectionBonus(player) + getLowerSectionScore(player) + getYatzyBonusValue(player)
+		return getUpperSectionScore(player) + getUpperSectionBonus(player) + getLowerSectionScore(player) + getYatzyBonus(player)
 	}
 
 	return {
+		BONUS_BREAKPOINT,
+		UPPER_BONUS,
+		YATZY_BONUS,
 		checkUpperSectionBonus,
 		getUpperSectionBonus,
 		getUpperSectionScore,
 		getLowerSectionScore,
-		getYatzyBonusValue,
+		getYatzyBonus,
 		getTotalScore
 	}
 }

@@ -2,12 +2,17 @@
 import { useGameStore } from "@/stores/game";
 import type { Player } from "@/types/player";
 import { computed, ref } from "vue";
+import PlayerScoreDetails from "./PlayerScoreDetails.vue";
 
 const gameStore = useGameStore()
 const players = computed(() => gameStore.players)
 const currentPlayerId = computed(() => gameStore.currentPlayerId)
 // #1 yellow crown on corner
 const starredPlayerId = computed(() => {
+	if (players.value.length === 1) {
+		return null
+	}
+
 	let playerId: number | null = null
 	let max = 0
 	players.value.forEach((player) => {
@@ -32,9 +37,9 @@ const handleScoreClick = (player: Player) => {
 </script>
 
 <template>
-	<div class="flex flex-row gap-4 justify-center">
+	<div id="player-labels" class="relative flex flex-row gap-4 justify-center">
 		<button v-for="(player, index) in players" :key="index"
-			class="flex flex-row border-2 rounded-lg bg-white *:px-2 *:py-1 cursor-pointer"
+			class="relative flex flex-row border-2 rounded-lg bg-white *:px-2 *:py-1 cursor-pointer"
 			:class="currentPlayerId === player.id ? 'border-emerald-500 shadow-[0_0_3px_oklch(60%_0.145_163.225)]' : 'border-black'"
 			@click="handleScoreClick(player)">
 			<!-- Crown Badge Start -->
@@ -48,24 +53,12 @@ const handleScoreClick = (player: Player) => {
 			<div class=" text-white" :class="[
 				player.id === currentPlayerId ? 'bg-emerald-500' : 'bg-black'
 			]">
-				P{{ player.id }}
+				S{{ player.id }}
 			</div>
 			<div class="font-mono">
 				{{ player.totalScore }}
 			</div>
 		</button>
 	</div>
-	<Teleport to="#app-main">
-		<div v-if="showDetails && playerForDetails"
-			class="absolute left-1/2 transform -translate-x-1/2 p-4 rounded-lg border-2 w-80 aspect-2/3 bg-red-200 top-14">
-			<div class="text-center">Punkte Player {{ playerForDetails.id }}</div>
-			<ul class="font-mono text-sm">
-				<li>Oberer Bereich: {{ playerForDetails.upperSectionScore }}</li>
-				<li>Bonus (>=63): {{ playerForDetails.upperSectionBonus }}</li>
-				<li>Unterer Bereich: {{ playerForDetails.lowerSectionScore }}</li>
-				<li>Extra Yatzy Bonus: {{ playerForDetails.yatzyBonusCount }}</li>
-				<li>Gesamt: {{ playerForDetails.totalScore }}</li>
-			</ul>
-		</div>
-	</Teleport>
+	<PlayerScoreDetails :open="showDetails" :player="playerForDetails" target="#player-labels"/>
 </template>

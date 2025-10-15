@@ -33,7 +33,7 @@ const categories = [
 
 const setScore = (category: keyof Player, score: number) => {
 	if (currentPlayer.value) {
-		// Bonus Yatzy +100
+		// Check if bonus Yatzy TODO: is BROKEN
 		if (currentPlayer.value['yatzy']) {
 			currentPlayer.value['yatzyBonusCount'] = +1
 		}
