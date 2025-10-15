@@ -5,6 +5,8 @@ import { useCategories } from '@/composables/useCategories'
 import { useGameStore } from "@/stores/game";
 import { useGame } from "@/composables/useGame";
 import type { Player } from '@/types/player';
+import IconFullHouse from './icons/IconFullHouse.vue';
+import IconStreet from './icons/IconStreet.vue';
 
 const gameStore = useGameStore()
 const game = useGame()
@@ -22,10 +24,10 @@ const categories = [
 	{ key: "sixes", label: "6", score: sumSixes },
 	{ key: "threeOfKind", label: "3x", score: isThreeOfKind },
 	{ key: "fourOfKind", label: "4x", score: isFourOfKind },
-	{ key: "fullHouse", label: "FH", score: isFullHouse },
+	{ key: "fullHouse", label: "FH", icon: IconFullHouse, score: isFullHouse },
 	{ key: "smallStraight", label: "KS", score: isSmallStraight },
-	{ key: "largeStraight", label: "LS", score: isLargeStraight },
-	{ key: "chance", label: "CH", score: sumChance },
+	{ key: "largeStraight", label: "GS", score: isLargeStraight },
+	{ key: "chance", label: "?", score: sumChance },
 	{ key: "yatzy", label: "Y!", score: isYatzy },
 ]
 
@@ -43,11 +45,12 @@ const setScore = (category: keyof Player, score: number) => {
 </script>
 
 <template>
-	<div v-if="currentPlayer" class="grid grid-cols-6 gap-x-2 gap-y-4 m-auto">
+	<div v-if="currentPlayer" class="grid grid-cols-6 gap-x-2 gap-y-4">
 		<CategoryItem v-for="category in categories" :key="category.key" :playerStatus="currentPlayer[category.key]"
 			:value="category.score.value" @clicked="setScore(category.key, category.score.value)"
-			class="h-18 last:col-span-full last:w-full">
-			{{ category.label }}
+			class="h-19 last:col-span-full last:w-full">
+			<component v-if="category.icon" :is="category.icon" class="w-5 h-5" />
+			<span v-else>{{ category.label }}</span>
 		</CategoryItem>
 	</div>
 </template>

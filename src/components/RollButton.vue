@@ -13,7 +13,10 @@ const roll = () => {
 }
 </script>
 <template>
-	<div class="flex flex-row justify-center">
+	<div class="flex flex-row justify-end items-baseline">
+		<div class="text-lg">
+			{{ gameStore.rollsLeft }}x
+		</div>
 		<button @click="roll()" :disabled="isDisabled"
 			class="size-20 cursor-pointer fill-white disabled:text-gray-400 disabled:cursor-not-allowed">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -27,8 +30,5 @@ const roll = () => {
 				</g>
 			</svg>
 		</button>
-		<div class="text-lg">
-			x {{ gameStore.rollsLeft }}
-		</div>
 	</div>
 </template>

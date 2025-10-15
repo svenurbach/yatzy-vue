@@ -9,7 +9,7 @@ export const useGameStore = defineStore('game', () => {
 	const rollsLeft = ref(3)
 	const hasDecision = ref(false)
 	const playerCount = ref(0)
-	const MAX_PLAYER = 3;
+	const MAX_PLAYER = 4;
 	const players = ref<Player[]>([])
 	const currentPlayerId = ref(0)
 	// Views
@@ -34,7 +34,7 @@ export const useGameStore = defineStore('game', () => {
 		const upperCategories = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes'] as const
 		const lowerCategories = ['threeOfKind', 'fourOfKind', 'fullHouse', 'smallStraight', 'largeStraight', 'chance', 'yatzy'] as const
 		const BONUS_BREAKPOINT = 63
-		const UPPER_BONUS = 50
+		const UPPER_BONUS = 35
 		const YATZY_BONUS = 100
 
 		player.upperSectionScore = upperCategories.reduce((sum, category) => {

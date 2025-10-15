@@ -19,20 +19,20 @@ watch(() => gameStore.playerCount, (newVal) => {
 </script>
 
 <template>
-	<div class="flex flex-col max-w-lg m-auto *:p-4 bg-neutral-200">
+	<div class="h-dvh flex flex-col max-w-md m-auto *:px-4 *:py-3 bg-neutral-200">
 		<AppHeader />
-		<main class="flex flex-col gap-6">
+		<main class="flex-1 flex flex-col gap-6">
 			<PlayerCountSelect v-if="gameStore.welcomeViewActive" />
-			<div v-if="gameStore.boardViewActive">
+			<template v-if="gameStore.boardViewActive">
 				<PlayerLabels />
 				<DiceSet />
 				<CategorySection />
 				<RollButton />
-			</div>
+			</template>
 		</main>
 		<footer class="bg-amber-500">
 			<div>
-				Sven Urbach
+				Sven Urbach, 2025
 			</div>
 		</footer>
 	</div>
