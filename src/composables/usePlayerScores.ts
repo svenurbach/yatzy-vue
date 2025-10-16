@@ -1,6 +1,6 @@
 import type { Player } from "@/types/player"
 
-export function useScores() {
+export function usePlayerScores() {
 	const UPPER_CATEGORIES = ['aces', 'twos', 'threes', 'fours', 'fives', 'sixes'] as const
 	const LOWER_CATEGORIES = ['threeOfKind', 'fourOfKind', 'fullHouse', 'smallStraight', 'largeStraight', 'chance', 'yatzy'] as const
 	const BONUS_BREAKPOINT = 63

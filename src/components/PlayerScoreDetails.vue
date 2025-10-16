@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useScores } from "@/composables/useScores"
+import { usePlayerScores } from "@/composables/usePlayerScores"
 import type { Player } from "@/types/player";
 import { type PropType } from "vue";
 
 
-const score = useScores()
+const score = usePlayerScores()
 
 defineProps({
 	open: {

@@ -17,5 +17,5 @@ export interface Player {
 	largeStraight: null | number;
 	chance: null | number;
 	yatzy: null | number;
-	yatzyBonusCount: null | number;
+	yatzyBonusCount: number;
 }

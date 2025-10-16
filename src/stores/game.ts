@@ -2,11 +2,11 @@ import { ref, computed, readonly } from 'vue'
 import { defineStore } from 'pinia'
 import type { Player } from '@/types/player'
 import { useDiceSet } from '@/composables/useDiceSet'
-import { useScores } from '@/composables/useScores'
+import { usePlayerScores } from '@/composables/usePlayerScores'
 
 export const useGameStore = defineStore('game', () => {
 	//  States / Data
-	const score = useScores()
+	const score = usePlayerScores()
 	const diceSet = useDiceSet(5)
 	const rollsLeft = ref(3)
 	const hasDecision = ref(false)
@@ -81,7 +81,7 @@ export const useGameStore = defineStore('game', () => {
 				largeStraight: null,
 				chance: null,
 				yatzy: null,
-				yatzyBonusCount: null
+				yatzyBonusCount: 0
 			}
 			players.value.push(newPlayer);
 		}

@@ -26,16 +26,16 @@ const categories = [
 	{ key: "fourOfKind", label: "4x", score: isFourOfKind },
 	{ key: "fullHouse", label: "FH", icon: IconFullHouse, score: isFullHouse },
 	{ key: "smallStraight", label: "KS", score: isSmallStraight },
-	{ key: "largeStraight", label: "GS", score: isLargeStraight },
+	{ key: "largeStraight", label: "GS", icon: IconStreet, score: isLargeStraight },
 	{ key: "chance", label: "?", score: sumChance },
 	{ key: "yatzy", label: "Y!", score: isYatzy },
 ]
 
 const setScore = (category: keyof Player, score: number) => {
 	if (currentPlayer.value) {
-		// Check if bonus Yatzy TODO: is BROKEN
-		if (currentPlayer.value['yatzy']) {
-			currentPlayer.value['yatzyBonusCount'] = +1
+		// Check if bonus Yatzy
+		if (currentPlayer.value['yatzy'] && isYatzy) {
+			currentPlayer.value['yatzyBonusCount']++
 		}
 		gameStore.setCategoryScore(currentPlayer.value.id, category, score)
 		gameStore.setPlayerScores(currentPlayer.value)
