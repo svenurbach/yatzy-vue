@@ -26,7 +26,7 @@ defineProps({
 	<Teleport :to=target>
 		<Transition>
 			<div v-if="open && player"
-				class="absolute left-1/2 transform -translate-x-1/2 p-4 rounded-lg border-2 w-80 aspect-3/1 bg-gray-900 text-white top-11 z-10 opacity-95">
+				class="absolute top-14 left-1/2 transform -translate-x-1/2 p-4 rounded-lg border-2 w-80 aspect-3/1 bg-gray-900 text-white z-10 opacity-95">
 				<div class="text-center text-lg font-bold italic pb-3">Punkteübersicht für Spieler {{ player.id }}</div>
 				<ul class="font-mono text-sm space-y-1">
 					<li>

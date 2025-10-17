@@ -33,15 +33,15 @@ const displayValue = computed(() => {
 
 <template>
 	<div class="flex flex-col text-center" :class="{ 'opacity-20': isAlreadyPicked }">
-		<button type="button" :disabled="isDisabled" class="flex flex-col justify-center items-center bg-amber-400 border-2
-rounded font-bold text-black transition-colors duration-100 h-full" :class="{
-	'bg-emerald-300': hasValueForPlayer,
+		<button type="button" :disabled="isDisabled" class="flex flex-col justify-center items-center bg-secondary border-2
+rounded font-bold border-black text-black transition-colors duration-100 h-full" :class="{
+	'bg-success': hasValueForPlayer,
 	'cursor-not-allowed': isDisabled,
 	'cursor-pointer': !isDisabled
 }" @click="$emit('clicked')">
 			<slot />
 		</button>
-		<div>
+		<div :class="{ 'font-bold': hasValueForPlayer }">
 			{{ displayValue }}
 		</div>
 	</div>

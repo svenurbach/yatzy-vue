@@ -40,11 +40,9 @@ npm run lint
 
 ## App Notes
 
+### Todo
+
 1. Loading Screen
-1. Amount of Player Screen
 1. Player turn start Screen
-1. Board Screen
-1. Menu Screen
 1. Highscore Screen
-1. Options Screen
-1. Yatzy Bonus +100 pro Kniffel umsetzen
+1. PWA App plugin, disable zoom etc

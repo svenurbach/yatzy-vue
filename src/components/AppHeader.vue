@@ -4,8 +4,8 @@ import MenuModal from './MenuModal.vue';
 </script>
 
 <template>
-	<header class="flex flex-row justify-between items-center bg-amber-500 mb-5">
-		<div class="fill-black h-full aspect-square">
+	<header class="flex flex-row justify-between items-center bg-primary text-bg py-2">
+		<div class="fill-bg h-full aspect-square">
 			<a href="/">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 					<path
@@ -16,9 +16,9 @@ import MenuModal from './MenuModal.vue';
 			</a>
 		</div>
 		<div>
-			<h1 class="text-2xl italic font-black font">Yatzy!</h1>
+			<h1 class="text-xl italic font-black font">Yatzy!</h1>
 		</div>
-		<div class="fill-black h-full aspect-square">
+		<div class="fill-bg h-full aspect-square">
 			<MenuModal />
 		</div>
 	</header>

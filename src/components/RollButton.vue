@@ -14,11 +14,11 @@ const roll = () => {
 </script>
 <template>
 	<div class="flex flex-row justify-end items-baseline">
-		<div class="text-lg">
+		<div class="text-xl font-bold" :class="{ 'text-gray-400': isDisabled }">
 			{{ gameStore.rollsLeft }}x
 		</div>
 		<button @click="roll()" :disabled="isDisabled"
-			class="size-20 cursor-pointer fill-white disabled:text-gray-400 disabled:cursor-not-allowed">
+			class="size-18 cursor-pointer fill-white disabled:text-gray-400 disabled:cursor-not-allowed">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
 				<g stroke="currentColor" stroke-linejoin="round" stroke-width="2">
 					<path
