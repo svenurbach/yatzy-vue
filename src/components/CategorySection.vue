@@ -8,7 +8,6 @@ import type { Player } from '@/types/player';
 import IconFullHouse from './icons/IconFullHouse.vue';
 import IconStreet from './icons/IconStreet.vue';
 import UpperIcons from './icons/UpperIcons.vue';
-import UpperIcons from './icons/UpperIcons.vue';
 
 const gameStore = useGameStore()
 const game = useGame()
