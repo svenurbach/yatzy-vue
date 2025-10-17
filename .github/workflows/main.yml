@@ -30,4 +30,5 @@ jobs:
           password: ${{ secrets.GST_FTP_PASSWORD }}
           server-dir: ${{ secrets.GST_FTP_FOLDER }}
           local-dir: dist/
+          protocol: ftps
           dry-run: true
