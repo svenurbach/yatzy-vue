@@ -37,6 +37,10 @@ export function usePlayerScores() {
 		return getUpperSectionScore(player) + getUpperSectionBonus(player) + getLowerSectionScore(player) + getYatzyBonus(player)
 	}
 
+	function isPlayerScoreCardComplete(player: Player) {
+		return !Object.values(player).some(value => value === null)
+	}
+
 	return {
 		BONUS_BREAKPOINT,
 		UPPER_BONUS,
@@ -46,6 +50,7 @@ export function usePlayerScores() {
 		getUpperSectionScore,
 		getLowerSectionScore,
 		getYatzyBonus,
-		getTotalScore
+		getTotalScore,
+		isPlayerScoreCardComplete
 	}
 }

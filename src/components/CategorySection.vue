@@ -8,6 +8,7 @@ import type { Player } from '@/types/player';
 import IconFullHouse from './icons/IconFullHouse.vue';
 import IconStreet from './icons/IconStreet.vue';
 import UpperIcons from './icons/UpperIcons.vue';
+import UpperIcons from './icons/UpperIcons.vue';
 
 const gameStore = useGameStore()
 const game = useGame()
@@ -35,7 +36,7 @@ const categories = [
 const setScore = (category: keyof Player, score: number) => {
 	if (currentPlayer.value) {
 		// Check if bonus Yatzy
-		if (currentPlayer.value['yatzy'] && isYatzy) {
+		if (currentPlayer.value['yatzy'] && isYatzy.value > 0) {
 			currentPlayer.value['yatzyBonusCount']++
 		}
 		gameStore.setCategoryScore(currentPlayer.value.id, category, score)

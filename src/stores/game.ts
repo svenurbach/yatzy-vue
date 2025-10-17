@@ -17,9 +17,22 @@ export const useGameStore = defineStore('game', () => {
 	// Views
 	const welcomeViewActive = ref(true)
 	const boardViewActive = ref(false)
+	const gameEndView = ref(false)
 
 	// Getters / Properties
 	const getCurrentPlayer = computed((): Player | undefined => players.value.find(p => p.id === currentPlayerId.value))
+	const getPlayerInLeaderId = computed(() => {
+		let leaderId: number | null = null
+		let max = 0
+		players.value.forEach((player) => {
+			if (player.totalScore > max) {
+				max = player.totalScore
+				leaderId = player.id
+			}
+		})
+		return leaderId !== null ? leaderId : undefined
+	})
+
 	const getDiceSet = computed(() => diceSet.diceSet.map(dice => dice.face))
 
 
@@ -107,7 +120,10 @@ export const useGameStore = defineStore('game', () => {
 		playerCount: readonly(playerCount),
 		welcomeViewActive,
 		boardViewActive,
+		gameEndView,
+		getPlayerByID,
 		getCurrentPlayer,
-		setPlayerScores
+		setPlayerScores,
+		getPlayerInLeaderId
 	}
 })
