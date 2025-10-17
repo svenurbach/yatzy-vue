@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useGame } from '@/composables/useGame'
 import IconMobileMenu from './icons/IconMobileMenu.vue';
+
+const game = useGame()
 
 const open = ref(false)
 
 const config = [
-	{ label: "Reset", icon: "", click: "" },
-	{ label: "Highscore", icon: "🏆", click: "" },
-	{ label: "FAQ", icon: "", click: "" },
-	{ label: "Darkmode", icon: "🍩", click: "" },
-	{ label: "Theme", icon: "", click: "" },
-	{ label: "Dice Theme", icon: "", click: "" },
-	{ label: "placholder", icon: "", click: "" },
-	{ label: "placholder", icon: "", click: "" },
+	{ label: "Reset", icon: "", click: () => game.reset() },
+	{ label: "Highscore", icon: "🏆", click: () => {} },
+	{ label: "FAQ", icon: "", click: () => {} },
+	{ label: "Darkmode", icon: "🍩", click: () => {} },
+	{ label: "Theme", icon: "", click: () => {} },
+	{ label: "Dice Theme", icon: "", click: () => {} },
+	{ label: "placholder", icon: "", click: () => {} },
+	{ label: "placholder", icon: "", click: () => {} },
 ]
 </script>
 
@@ -33,7 +36,8 @@ const config = [
 			<div v-if="open" class="fixed left-1/2 tranform -translate-x-1/2 top-14 bottom-12 bg-neutral-200 z-100 w-md">
 				<ul class="grid grid-cols-2 gap-8 p-8 ">
 					<li v-for="(item, index) in config" :key="index"
-						class="flex flex-col justify-center items-center  border-2 rounded-lg bg-white size-30 odd:justify-self-end cursor-pointer hover:bg-indigo-200/80">
+						class="flex flex-col justify-center items-center  border-2 rounded-lg bg-white size-30 odd:justify-self-end cursor-pointer hover:bg-indigo-200/80"
+						@click="() => { item.click(); open = false; }">
 						<div class="flex flex-col justify-center items-center">
 							<span class="text-4xl">{{ item.icon }}</span>
 							<span class="font-bold">{{ item.label }}</span>

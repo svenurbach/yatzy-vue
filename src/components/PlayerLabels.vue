@@ -12,16 +12,7 @@ const starredPlayerId = computed(() => {
 	if (players.value.length === 1) {
 		return null
 	}
-
-	let playerId: number | null = null
-	let max = 0
-	players.value.forEach((player) => {
-		if (player.totalScore > max) {
-			max = player.totalScore
-			playerId = player.id
-		}
-	})
-	return playerId
+	return gameStore.getPlayerInLeaderId
 })
 const showDetails = ref(false)
 const playerForDetails = ref<Player>()
@@ -33,7 +24,7 @@ const handleScoreClick = (player: Player) => {
 		showDetails.value = !showDetails.value
 	}
 }
-// hasBonus grren plus
+// hasBonus green plus
 </script>
 
 <template>
