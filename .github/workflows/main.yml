@@ -22,15 +22,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Upload via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      - name: Upload via FTP to IONOS
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
-          server: ${{ secrets.GST_FTP_HOST }}
-          port: 22
-          protocol: ftp
-          username: ${{ secrets.GST_FTP_USERNAME }}
-          password: ${{ secrets.GST_FTP_PASSWORD }}
-          server-dir: ${{ secrets.GST_FTP_FOLDER }}
-          local-dir: ./dist/
-          timeout: 60000
-          dry-run: true
+            server: ${{ secrets.GST_FTP_HOST }}
+            port: 22
+            username: ${{ secrets.GST_FTP_USERNAME }}
+            password: ${{ secrets.GST_FTP_PASSWORD }}
+            local_path: './dist/*'              # dein Build-Ordner
+            remote_path: '/yatzy'   # dein Zielverzeichnis auf dem IONOS-Server
+            sftp_only: true                 # erzwingt reines SFTP
+            delete_remote_files: false      # keine alten Dateien löschen (optional)
