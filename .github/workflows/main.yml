@@ -31,5 +31,6 @@ jobs:
           username: ${{ secrets.GST_FTP_USERNAME }}
           password: ${{ secrets.GST_FTP_PASSWORD }}
           server-dir: ${{ secrets.GST_FTP_FOLDER }}
-          local-dir: dist/
+          local-dir: ./dist/
+          timeout: 60000
           dry-run: true
