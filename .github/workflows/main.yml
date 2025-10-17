@@ -30,6 +30,6 @@ jobs:
             username: ${{ secrets.GST_FTP_USERNAME }}
             password: ${{ secrets.GST_FTP_PASSWORD }}
             local_path: './dist/*'
-            remote_path: ${{ secrets.FTP_FOLDER }}
+            remote_path: ${{ vars.FTP_FOLDER }}
             sftp_only: true
             delete_remote_files: false
