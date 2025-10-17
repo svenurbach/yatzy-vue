@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - prod
+name: Deploy to Production
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.GST_FTP_HOST }}
+          username: ${{ secrets.GST_FTP_USERNAME }}
+          password: ${{ secrets.GST_FTP_PASSWORD }}
+          server-dir: ${{ secrets.GST_FTP_FOLDER }}
+          local-dir: dist
+          dry-run: true
