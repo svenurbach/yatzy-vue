@@ -4,7 +4,7 @@ import MenuModal from './MenuModal.vue';
 </script>
 
 <template>
-	<header class="flex flex-row justify-between items-center bg-amber-500 mb-8">
+	<header class="flex flex-row justify-between items-center bg-amber-500 mb-5">
 		<div class="fill-black h-full aspect-square">
 			<a href="/">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">

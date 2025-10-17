@@ -15,7 +15,7 @@ const handleDiceClick = (dice: { hold: () => void; }) => {
 	<div>
 		<ul class="flex items-center justify-center h-22">
 			<li v-for="(dice, index) in gameStore.diceSet.diceSet" :key="index" @click="handleDiceClick(dice)"
-				class="cursor-pointer w-20 transition-all duration-100"
+				class="cursor-pointer w-20 transition-all duration-0"
 				:class="dice.isHold ? 'transform -translate-y-2 rotate-2 scale-90 fill-blue-200 stroke-blue-600 drop-shadow-[0_0_4px_rgba(59,130,246,0.7)]' : 'fill-stone-50 stroke-black'">
 				<DiceIcons :value="dice.face" />
 			</li>

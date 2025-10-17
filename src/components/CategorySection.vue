@@ -17,12 +17,12 @@ const { sumOnes, sumTwos, sumThrees, sumFours, sumFives, sumSixes, isThreeOfKind
 const currentPlayer = computed(() => gameStore.getCurrentPlayer)
 
 const categories = [
-	{ key: "aces", label: 1, icon: UpperIcons, iconSize: "w-8", score: sumOnes },
-	{ key: "twos", label: 2, icon: UpperIcons, iconSize: "w-8", score: sumTwos },
-	{ key: "threes", label: 3, icon: UpperIcons, iconSize: "w-8", score: sumThrees },
-	{ key: "fours", label: 4, icon: UpperIcons, iconSize: "w-8", score: sumFours },
-	{ key: "fives", label: 5, icon: UpperIcons, iconSize: "w-8", score: sumFives },
-	{ key: "sixes", label: 6, icon: UpperIcons, iconSize: "w-8", score: sumSixes },
+	{ key: "aces", label: 1, icon: UpperIcons, iconSize: "w-10", score: sumOnes },
+	{ key: "twos", label: 2, icon: UpperIcons, iconSize: "w-10", score: sumTwos },
+	{ key: "threes", label: 3, icon: UpperIcons, iconSize: "w-10", score: sumThrees },
+	{ key: "fours", label: 4, icon: UpperIcons, iconSize: "w-10", score: sumFours },
+	{ key: "fives", label: 5, icon: UpperIcons, iconSize: "w-10", score: sumFives },
+	{ key: "sixes", label: 6, icon: UpperIcons, iconSize: "w-10", score: sumSixes },
 	{ key: "threeOfKind", label: "3x", score: isThreeOfKind },
 	{ key: "fourOfKind", label: "4x", score: isFourOfKind },
 	{ key: "fullHouse", label: "FH", icon: IconFullHouse, score: isFullHouse },
@@ -46,7 +46,7 @@ const setScore = (category: keyof Player, score: number) => {
 </script>
 
 <template>
-	<div v-if="currentPlayer" class="grid grid-cols-6 gap-x-2 gap-y-4">
+	<div v-if="currentPlayer" class="grid grid-cols-6 gap-1.5">
 		<CategoryItem v-for="category in categories" :key="category.key" :playerStatus="currentPlayer[category.key]"
 			:value="category.score.value" @clicked="setScore(category.key, category.score.value)"
 			class="h-19 last:col-span-full last:w-full">

@@ -13,9 +13,7 @@ const config = [
 	{ label: "FAQ", icon: "", click: () => {} },
 	{ label: "Darkmode", icon: "🍩", click: () => {} },
 	{ label: "Theme", icon: "", click: () => {} },
-	{ label: "Dice Theme", icon: "", click: () => {} },
-	{ label: "placholder", icon: "", click: () => {} },
-	{ label: "placholder", icon: "", click: () => {} },
+	{ label: "Dice Theme", icon: "", click: () => {} }
 ]
 </script>
 
