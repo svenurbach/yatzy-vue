@@ -9,14 +9,17 @@
 		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
 		monospace;
 	--color-primary: #22223b;
-	--color-secondary: #9a8c98;
-	--color-bg: #f2e9e4; /* allgemeiner Hintergrund */
-	--color-surface: #ffffff; /* Karten, Panels, etc. */
-	--color-border: #e5e7eb; /* dezente Linien */
-	--color-text: #1f2937; /* Standard-Textfarbe */
-	--color-text-muted: #6b7280; /* weniger betonter Text */
+	/* 4A4E69 */
+	--color-secondary: #c9ada7;
+	/* C9ADA7 */
+	--color-bg: #f2e9e4;
 
-	--color-success: oklch(76.5% 0.177 163.223);
+	--color-text: #2c2c2c;
+	--color-text-inverted: #f4f4f4;
+	--color-text-muted: #6b7280; /* weniger betonter Text */
+	--color-disabled: #b1b1b1;
+
+	--color-success: oklch(84.5% 0.143 164.978);
 	--color-warning: #facc15;
 	--color-error: #dc2626;
 	--color-info: #3b82f6;
@@ -32,5 +35,4 @@
 :root {
 	color: var(--color-text);
 	background-color: var(--color-bg);
-	/* --color-primary: oklch(96.351% 0.18816 112.365); */
 }

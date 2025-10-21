@@ -12,8 +12,8 @@ const handlePlayerCountClick = (numberOfPlayer: number) => {
 		<h2>Wähle die Anzahl der Spieler?</h2>
 		<div class="flex flex-col gap-4">
 			<button v-for="num in gameStore.MAX_PLAYER" type="button" :key="num" class="size-14 gap-2 border-2 rounded
-			cursor-pointer bg-white transition-colors duration-500 hover:bg-emerald-100"
-				:class="{ 'bg-emerald-400': num === gameStore.playerCount }" @click="handlePlayerCountClick(num)">
+			cursor-pointer bg-text-inverted transition-colors duration-500 hover:bg-success/30"
+				:class="{ 'bg-success': num === gameStore.playerCount }" @click="handlePlayerCountClick(num)">
 				{{ num }}
 			</button>
 		</div>

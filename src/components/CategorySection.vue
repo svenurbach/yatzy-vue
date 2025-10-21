@@ -50,8 +50,9 @@ const setScore = (category: keyof Player, score: number) => {
 		<CategoryItem v-for="category in categories" :key="category.key" :playerStatus="currentPlayer[category.key]"
 			:value="category.score.value" @clicked="setScore(category.key, category.score.value)"
 			class="h-19 last:col-span-full last:w-full">
-			<component v-if="category.icon" :is="category.icon" :value="category.label" :class="category.iconSize || 'w-6'"/>
-			<span class="text-xl" v-else>{{ category.label }}</span>
+			<component v-if="category.icon" :is="category.icon" :value="category.label" class="fill-text"
+				:class="category.iconSize || 'w-6'" />
+			<span class="text-xl text-text" v-else>{{ category.label }}</span>
 		</CategoryItem>
 	</div>
 </template>

@@ -30,8 +30,8 @@ const winnerTitle = computed(() => winnerName.value.length > 0 ? winnerName.valu
 			<div class="text-6xl py-6">🏆</div>
 			<div class="flex flex-col items-center gap-1">
 				<input type="text" v-model="winnerName" :placeholder="`Namen eingeben! (Spieler ${winner.id})`"
-					class="border px-6 py-2 bg-white w-full text-center" />
-				<button type="submit" class="px-6 py-2 border-2 rounded bg-green-300 w-full cursor-pointer">Highscore
+					class="border px-6 py-2 bg-text w-full text-center" />
+				<button type="submit" class="px-6 py-2 border-2 rounded bg-success w-full cursor-pointer">Highscore
 					eintragen</button>
 			</div>
 		</div>
@@ -39,7 +39,7 @@ const winnerTitle = computed(() => winnerName.value.length > 0 ? winnerName.valu
 			<div v-for="(player, index) in otherPlayers" :key="index">
 				Spieler {{ player.id }} erzielte {{ player.totalScore }} Punkte
 			</div>
-			<button type="button" class="px-6 py-2 border-2 rounded bg-red-300 w-full cursor-pointer">Revanche!</button>
+			<button type="button" class="px-6 py-2 border-2 rounded bg-error w-full cursor-pointer">Revanche!</button>
 		</div>
 	</div>
 </template>

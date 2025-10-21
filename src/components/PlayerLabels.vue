@@ -30,8 +30,8 @@ const handleScoreClick = (player: Player) => {
 <template>
 	<div id="player-labels" class="relative flex flex-row justify-between pt-6">
 		<button v-for="(player, index) in players" :key="index"
-			class="relative flex flex-row border-2 rounded-lg bg-white w-[7.5ch] cursor-pointer"
-			:class="currentPlayerId === player.id ? 'border-success shadow-[0_0_3px_oklch(60%_0.145_163.225)]' : 'border-primary'"
+			class="relative flex flex-row border-2 rounded-lg bg-text-inverted w-[7.5ch] cursor-pointer"
+			:class="player.id === currentPlayerId ? 'border-secondary' : 'border-primary'"
 			@click="handleScoreClick(player)">
 			<!-- Crown Badge Start -->
 			<div v-if="player.id === starredPlayerId"
@@ -41,8 +41,8 @@ const handleScoreClick = (player: Player) => {
 				</svg>
 			</div>
 			<!-- Crown Badge End -->
-			<div class="text-bg px-1 pr-2" :class="[
-				player.id === currentPlayerId ? 'bg-success' : 'bg-primary'
+			<div class="px-1 pr-2" :class="[
+				player.id === currentPlayerId ? 'bg-secondary text-text' : 'bg-primary text-text-inverted'
 			]">
 				S{{ player.id }}
 			</div>
