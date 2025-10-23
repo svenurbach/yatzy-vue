@@ -15,6 +15,7 @@
 	--color-bg: #f2e9e4;
 
 	--color-text: #2c2c2c;
+	--color-muted: #6d6d6d;
 	--color-text-inverted: #f4f4f4;
 	--color-text-muted: #6b7280; /* weniger betonter Text */
 	--color-disabled: #b1b1b1;
@@ -25,14 +26,26 @@
 	--color-info: #3b82f6;
 }
 
-/* @theme .dark {
+/* .theme-brown {
 	--color-primary: #738ab8;
 	--color-secondary: #fbbf24;
 	--color-bg: #111827;
 	--color-text: #e5e7eb;
 } */
 
-:root {
+#app-wrapper {
 	color: var(--color-text);
 	background-color: var(--color-bg);
+}
+
+h1 {
+	@apply text-xl font-black italic;
+}
+
+h2 {
+	@apply text-lg font-bold italic;
+}
+
+h3 {
+	@apply font-bold;
 }
