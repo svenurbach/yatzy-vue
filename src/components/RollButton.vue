@@ -13,7 +13,7 @@ const roll = () => {
 }
 </script>
 <template>
-	<div class="flex flex-row justify-end items-baseline">
+	<div class="flex flex-row justify-end items-baseline pb-2">
 		<div class="text-xl font-bold" :class="{ 'text-disabled': isDisabled }">
 			{{ gameStore.rollsLeft }}x
 		</div>

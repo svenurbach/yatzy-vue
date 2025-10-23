@@ -14,10 +14,6 @@ export const useGameStore = defineStore('game', () => {
 	const MAX_PLAYER = 4;
 	const players = ref<Player[]>([])
 	const currentPlayerId = ref(0)
-	// Views
-	const welcomeViewActive = ref(true)
-	const boardViewActive = ref(false)
-	const gameEndView = ref(false)
 
 	// Getters / Properties
 	const getCurrentPlayer = computed((): Player | undefined => players.value.find(p => p.id === currentPlayerId.value))
@@ -118,9 +114,6 @@ export const useGameStore = defineStore('game', () => {
 		setCategoryScore,
 		currentPlayerId,
 		playerCount: readonly(playerCount),
-		welcomeViewActive,
-		boardViewActive,
-		gameEndView,
 		getPlayerByID,
 		getCurrentPlayer,
 		setPlayerScores,

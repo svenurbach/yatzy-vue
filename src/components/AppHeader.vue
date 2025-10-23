@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import MenuModal from './MenuModal.vue';
+import { useView } from '@/composables/useView';
+import IconMobileMenu from '@/components/icons/IconMobileMenu.vue';
+import IconClose from '@/components/icons/IconClose.vue';
+import { computed } from 'vue';
 
+const { setView, isInGroup } = useView()
+
+const showCloseButton = computed(() => isInGroup('menu'))
+
+function toggleMenu() {
+	if (isInGroup('menu')) setView('board')
+	else setView('options')
+}
 </script>
 
 <template>
-	<header class="flex flex-row justify-between items-center bg-primary text-bg py-2">
-		<div class="fill-bg h-full aspect-square">
+	<header class="flex flex-row justify-between items-center bg-primary text-text-inverted fill-text-inverted py-2.5">
+		<div class="h-full aspect-square">
 			<a href="/">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 					<path
@@ -16,10 +27,17 @@ import MenuModal from './MenuModal.vue';
 			</a>
 		</div>
 		<div>
-			<h1 class="text-xl italic font-black font">Yatzy!</h1>
+			<h1>Yatzy!</h1>
 		</div>
-		<div class="fill-bg h-full aspect-square">
-			<MenuModal />
+		<div class="h-full aspect-square">
+			<button @click="toggleMenu()" class="h-full aspect-square cursor-pointer">
+				<span v-if="showCloseButton">
+					<IconClose />
+				</span>
+				<span v-else>
+					<IconMobileMenu />
+				</span>
+			</button>
 		</div>
 	</header>
 </template>

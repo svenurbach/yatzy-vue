@@ -1,4 +1,5 @@
 import { useGameStore } from "@/stores/game";
+import { useView } from '@/composables/useView'
 import { useCategories } from "@/composables/useCategories"
 import { usePlayerScores } from "@/composables/usePlayerScores"
 import { computed } from "vue";
@@ -7,6 +8,7 @@ export function useGame() {
 	const gameStore = useGameStore()
 	const categories = useCategories()
 	const playerScore = usePlayerScores()
+	const { setView } = useView()
 
 	const diceSet = computed(() => gameStore.diceSet.diceSet.map(dice => dice.face))
 
@@ -17,8 +19,7 @@ export function useGame() {
 	}
 
 	const startBoard = () => {
-		gameStore.welcomeViewActive = false
-		gameStore.boardViewActive = true
+		setView('board')
 		gameStore.setCurrentPlayerId(1)
 		gameStore.diceSet.resetAll()
 		gameStore.resetRolls()
@@ -27,8 +28,7 @@ export function useGame() {
 
 	const endTurn = () => {
 		if (isGameEnd()) {
-			gameStore.gameEndView = true
-			gameStore.boardViewActive = false
+			setView('gameover')
 		}
 		gameStore.resetRolls()
 		gameStore.diceSet.resetAll()
@@ -53,9 +53,7 @@ export function useGame() {
 	}
 
 	const reset = () => {
-		gameStore.welcomeViewActive = true
-		gameStore.boardViewActive = false
-		gameStore.gameEndView = false
+		setView('welcome')
 	}
 
 	return {

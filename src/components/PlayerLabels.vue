@@ -28,7 +28,7 @@ const handleScoreClick = (player: Player) => {
 </script>
 
 <template>
-	<div id="player-labels" class="relative flex flex-row justify-between pt-6">
+	<div id="player-labels" class="relative flex flex-row justify-around">
 		<button v-for="(player, index) in players" :key="index"
 			class="relative flex flex-row border-2 rounded-lg bg-text-inverted w-[7.5ch] cursor-pointer"
 			:class="player.id === currentPlayerId ? 'border-secondary' : 'border-primary'"

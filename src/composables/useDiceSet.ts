@@ -1,15 +1,15 @@
-import { useDice } from './useDice'
+import { useDice } from '@/composables/useDice'
 
 export function useDiceSet(count = 5) {
-  const diceSet = Array.from({ length: count }, () => useDice())
+	const diceSet = Array.from({ length: count }, () => useDice())
 
-  function rollAll() {
-    diceSet.forEach((dice) => dice.roll())
-  }
+	function rollAll() {
+		diceSet.forEach((dice) => dice.roll())
+	}
 
-  function resetAll() {
-    diceSet.forEach((dice) => dice.reset())
-  }
+	function resetAll() {
+		diceSet.forEach((dice) => dice.reset())
+	}
 
-  return { diceSet, rollAll, resetAll }
+	return { diceSet, rollAll, resetAll }
 }
