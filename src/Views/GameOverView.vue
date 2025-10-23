@@ -4,6 +4,7 @@ import { useGameStore } from '@/stores/game';
 import { useHighscoreStore } from '@/stores/highscore';
 import { useGame } from '@/composables/useGame'
 import AppButton from '@/components/AppButton.vue';
+import type { Player } from '@/types/player';
 
 const gameStore = useGameStore()
 const highscoreStore = useHighscoreStore()

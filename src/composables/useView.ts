@@ -21,7 +21,6 @@ export function useView() {
 	const gameStore = useGameStore()
 
 	function setView(view: View) {
-		// ✅ Navigation Guard:
 		if (view === 'board' && gameStore.playerCount === 0) {
 			console.warn('Cannot start game: no players set')
 			currentView.value = 'welcome'
