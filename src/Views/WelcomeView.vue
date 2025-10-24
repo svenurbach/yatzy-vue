@@ -2,8 +2,22 @@
 import PlayerCountSelect from '@/components/PlayerCountSelect.vue';
 import { useView } from '@/composables/useView';
 import AppButton from '@/components/AppButton.vue';
+import { computed, ref } from 'vue';
+import { useGameStore } from '@/stores/game';
 
+const gameStore = useGameStore();
 const { setView } = useView()
+
+const playerCount = ref(0)
+const isDisabled = computed(() => playerCount.value === 0)
+
+const handlePlayerCountChange = (count: number) => {
+	playerCount.value = count
+}
+
+const handleStartGame = () => {
+	gameStore.setPlayerCount(playerCount.value)
+}
 </script>
 
 <template>
@@ -13,8 +27,8 @@ const { setView } = useView()
 			<p>einem Kniffel-Spiel</p>
 		</div>
 		<div>
-			<PlayerCountSelect />
-			<AppButton label="Spiel starten!" color="green" />
+			<PlayerCountSelect @player-count="handlePlayerCountChange" />
+			<AppButton label="Spiel starten!" color="green" :disabled="isDisabled" @click="handleStartGame" />
 		</div>
 		<div>
 			<AppButton label="Highscores" color="neutral" @click="setView('highscore')" />

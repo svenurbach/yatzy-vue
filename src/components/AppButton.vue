@@ -15,3 +15,10 @@ defineProps<Props>()
 		{{ label }}
 	</button>
 </template>
+<style scoped>
+@reference "tailwindcss";
+
+button[disabled] {
+	@apply opacity-15 cursor-not-allowed;
+}
+</style>
