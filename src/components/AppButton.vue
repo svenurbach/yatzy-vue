@@ -7,11 +7,12 @@ interface Props {
 defineProps<Props>()
 </script>
 <template>
-	<button class="px-6 py-2 border-2 rounded w-2/3 cursor-pointer" :class="{
-		'bg-error/70': color === 'red',
-		'bg-success/70': color === 'green',
-		'bg-secondary/70': color === 'neutral'
-	}">
+	<button class="px-6 py-2 border-2 rounded w-2/3 cursor-pointer transition-opacity duration-300 hover:brightness-110"
+		:class="{
+			'bg-error': color === 'red',
+			'bg-success': color === 'green',
+			'bg-secondary': color === 'neutral'
+		}">
 		{{ label }}
 	</button>
 </template>
@@ -19,6 +20,6 @@ defineProps<Props>()
 @reference "tailwindcss";
 
 button[disabled] {
-	@apply opacity-15 cursor-not-allowed;
+	@apply opacity-20 cursor-not-allowed;
 }
 </style>
