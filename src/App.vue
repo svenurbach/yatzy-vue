@@ -22,9 +22,9 @@ watch(() => gameStore.playerCount, (newVal) => {
 </script>
 
 <template>
-	<div id="app-wrapper" class="h-dvh flex flex-col max-w-md m-auto *:px-4">
+	<div id="app-wrapper" class="h-dvh lg:max-h-210 grid grid-rows-[auto_1fr_auto] max-w-md m-auto *:px-4">
 		<AppHeader />
-		<main class="flex-1 *:h-full bg-bg py-6">
+		<main class="*:h-full bg-bg py-6">
 			<WelcomeView v-if="isView('welcome')" />
 			<BoardView v-if="isView('board')" />
 			<GameOverView v-if="isView('gameover')" />
